@@ -1,15 +1,296 @@
+/* ─── Reset & Base ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --black:    #080808;
+    --white:    #f5f5f0;
+    --accent:   #c8a96e;   /* warm gold */
+    --muted:    #6b6b6b;
+    --surface:  #111111;
+    --border:   rgba(255,255,255,0.08);
+    --radius:   6px;
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
 body {
-    background-color: #000;
-    color: #fff;
+    background-color: var(--black);
+    color: var(--white);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
 }
-.logo {
-    width: 30%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
+
+/* ─── Noise texture overlay ──────────────────────────────────────── */
+.noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    opacity: 0.035;
 }
-.title {
-    font-size: 2rem;
+
+/* ─── Radial glow behind hero ────────────────────────────────────── */
+body::before {
+    content: '';
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80vw;
+    height: 70vh;
+    background: radial-gradient(ellipse at center, rgba(200,169,110,0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────── */
+.site-header {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 3rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.wordmark {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    color: var(--white);
+    opacity: 0.9;
+}
+
+.badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    border: 1px solid rgba(200,169,110,0.4);
+    padding: 0.3em 0.8em;
+    border-radius: 2px;
+    text-transform: uppercase;
+}
+
+/* ─── Hero ───────────────────────────────────────────────────────── */
+.hero {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    margin-bottom: 2rem;
+    padding: 5rem 1.5rem 4rem;
+    gap: 2rem;
+}
+
+.hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(0.7); }
+}
+
+.hero-headline {
+    font-family: var(--font-serif);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    max-width: 18ch;
+}
+
+.hero-subtext {
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 46ch;
+}
+
+/* ─── Email form ─────────────────────────────────────────────────── */
+.email-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    max-width: 480px;
+}
+
+.input-group {
+    display: flex;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+    transition: border-color 0.2s;
+}
+
+.input-group:focus-within {
+    border-color: rgba(200,169,110,0.5);
+}
+
+.input-group input[type="email"] {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0.85rem 1.2rem;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--white);
+}
+
+.input-group input[type="email"]::placeholder {
+    color: var(--muted);
+}
+
+.input-group button {
+    background: var(--accent);
+    color: var(--black);
+    border: none;
+    padding: 0.85rem 1.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, opacity 0.2s;
+    flex-shrink: 0;
+}
+
+.input-group button:hover { opacity: 0.88; }
+
+.form-note {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+}
+
+.form-error {
+    font-size: 0.8rem;
+    color: #e07070;
+    margin-top: -0.2rem;
+}
+
+/* ─── Success state ──────────────────────────────────────────────── */
+.success-message {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(200,169,110,0.08);
+    border: 1px solid rgba(200,169,110,0.3);
+    border-radius: var(--radius);
+    padding: 1rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent);
+    max-width: 400px;
+}
+
+.success-message svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+/* ─── Countdown ──────────────────────────────────────────────────── */
+.countdown {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 64px;
+}
+
+.countdown-number {
+    font-family: var(--font-sans);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    font-variant-numeric: tabular-nums;
+}
+
+.countdown-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.4rem;
+}
+
+.countdown-sep {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.1;
+    padding-top: 0.05em;
+    user-select: none;
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────── */
+.site-footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .site-header { padding: 1.25rem 1.5rem; }
+    .hero { padding: 3.5rem 1.25rem 3rem; }
+    .countdown { gap: 0.25rem; }
+    .countdown-item { min-width: 52px; }
+    .input-group { flex-direction: column; border-radius: var(--radius); }
+    .input-group input[type="email"] { border-radius: var(--radius) var(--radius) 0 0; }
+    .input-group button { border-radius: 0 0 var(--radius) var(--radius); width: 100%; }
 }
