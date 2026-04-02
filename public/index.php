@@ -5,18 +5,21 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = filter_var(trim($_POST['email'] ?? ''), FILTER_VALIDATE_EMAIL);
     if ($email) {
-        $file = __DIR__ . '/../data/signups.csv';
-        if (!is_dir(dirname($file))) {
-            mkdir(dirname($file), 0755, true);
+        $dir  = dirname(__DIR__) . '/data';
+        $file = $dir . '/signups.csv';
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
         }
         $new = !file_exists($file);
-        $fh = fopen($file, 'a');
+        $fh  = fopen($file, 'a');
         if ($fh) {
             if ($new) fputcsv($fh, ['email', 'date', 'ip']);
             fputcsv($fh, [$email, date('Y-m-d H:i:s'), $_SERVER['REMOTE_ADDR'] ?? '']);
             fclose($fh);
+            $submitted = true;
+        } else {
+            $error = 'Could not save your email. Please try again.';
         }
-        $submitted = true;
     } else {
         $error = 'Please enter a valid email address.';
     }
