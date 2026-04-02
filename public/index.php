@@ -31,10 +31,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kintek Group — Something Big Is Coming</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Kintek Group is relaunching. Be the first to know when we lift the curtain. Sign up for early access updates.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.kintekgroup.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.kintekgroup.com/">
+    <meta property="og:site_name" content="Kintek Group">
+    <meta property="og:title" content="Kintek Group — Something Big Is Coming">
+    <meta property="og:description" content="Kintek Group is relaunching. Be the first to know when we lift the curtain. Sign up for early access updates.">
+    <meta property="og:image" content="https://www.kintekgroup.com/images/spartan-helmet.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kintek Group — Something Big Is Coming">
+    <meta name="twitter:description" content="Kintek Group is relaunching. Be the first to know when we lift the curtain.">
+    <meta name="twitter:image" content="https://www.kintekgroup.com/images/spartan-helmet.jpg">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://www.kintekgroup.com/#organization",
+                "name": "Kintek Group",
+                "url": "https://www.kintekgroup.com/",
+                "logo": "https://www.kintekgroup.com/images/KG-logo.png",
+                "sameAs": []
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://www.kintekgroup.com/#website",
+                "url": "https://www.kintekgroup.com/",
+                "name": "Kintek Group",
+                "publisher": { "@id": "https://www.kintekgroup.com/#organization" }
+            },
+            {
+                "@type": "WebPage",
+                "@id": "https://www.kintekgroup.com/#webpage",
+                "url": "https://www.kintekgroup.com/",
+                "name": "Kintek Group — Something Big Is Coming",
+                "description": "Kintek Group is relaunching. Be the first to know when we lift the curtain.",
+                "isPartOf": { "@id": "https://www.kintekgroup.com/#website" }
+            }
+        ]
+    }
+    </script>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXBKSB10LB"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
