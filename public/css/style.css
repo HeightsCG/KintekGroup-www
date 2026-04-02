@@ -9,8 +9,8 @@
     --surface:  #111111;
     --border:   rgba(255,255,255,0.08);
     --radius:   6px;
-    --font-sans: 'Inter', system-ui, sans-serif;
-    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'DM Sans', system-ui, sans-serif;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
 }
 
 html { font-size: 16px; scroll-behavior: smooth; }
@@ -123,10 +123,10 @@ body::before {
 
 .hero-headline {
     font-family: var(--font-serif);
-    font-size: clamp(2.8rem, 7vw, 5.5rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    font-size: clamp(3.2rem, 8vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: 0.01em;
     color: var(--white);
     max-width: 18ch;
 }
@@ -229,48 +229,6 @@ body::before {
     flex-shrink: 0;
 }
 
-/* ─── Countdown ──────────────────────────────────────────────────── */
-.countdown {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    margin-top: 1rem;
-}
-
-.countdown-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 64px;
-}
-
-.countdown-number {
-    font-family: var(--font-sans);
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    color: var(--white);
-    font-variant-numeric: tabular-nums;
-}
-
-.countdown-label {
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 0.4rem;
-}
-
-.countdown-sep {
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    font-weight: 300;
-    color: var(--muted);
-    line-height: 1.1;
-    padding-top: 0.05em;
-    user-select: none;
-}
 
 /* ─── Footer ─────────────────────────────────────────────────────── */
 .site-footer {
